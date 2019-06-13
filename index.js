@@ -1,4 +1,4 @@
-/* Godlatro Graphql merger v.1.1.3 */
+/* Godlatro Graphql merger v.1.1.4 */
 const { readFileSync, readdirSync } = require('fs');
 const merger = (options) => {
 
@@ -34,21 +34,18 @@ const merger = (options) => {
       console.log('merger Mutation =',Mutation)
       console.log('merger file debug end')
     }
-    if(!!Query){
-      Query.forEach(e => {
+
+      Query && Query.length && Query.forEach(e => {
         let S = e.replace(/type[\s]+Query[\s]+{/g,'')
         .replace(/}/g,'');
         Querys.push(S);
       });
-    }
-    if(!!Mutation){
-      Mutation.forEach(e => {
+
+      Mutation && Mutation.length && Mutation.forEach(e => {
         let S = e.replace(/type[\s]+Mutation[\s]+{/g,'')
         .replace(/}/g,'');
         Muts.push(S);
       });
-
-    }
 
     Cont = Cont.replace(/(type[\s]+Query[\s]+{)[\s\S]*?}/g,'')
     .replace(/(type[\s]+Mutation[\s]+{)[\s\S]*?}/g, '');
