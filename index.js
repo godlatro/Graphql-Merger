@@ -1,10 +1,13 @@
-/* Godlatro Graphql merger v.1.1 */
+/* Godlatro Graphql merger v.1.1.2 */
 const { readFileSync, readdirSync } = require('fs');
 const merger = (options) => {
 
   const Debug = options && options.debug && options.debug || false;
-  const Dir = options && options.dir && options.dir || __dirname || './';
+  const Dir = options && options.dir && options.dir || this.__dirname;
   const FType = options && options.type && options.type || 'graphql';
+  if(Debug){
+    console.log('Merger directory ', Dir);
+  }
 
   const Querys = [];
   const Muts = [];
