@@ -6,6 +6,10 @@ My merger dont need any dependency (only [fs]), small and simple;
 
 You can use this module to merge all your `*.graphql` files for `Apollo Graphql Client`
 
+### install
+with `npm i graphql-merger`
+or just insert `index.js`, and rename it as you wish
+
 ## Example Schemas:
 
 ## *user.graphql*

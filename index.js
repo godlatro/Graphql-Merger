@@ -1,4 +1,4 @@
-/* Godlatro Graphql merger v.1.1.2 */
+/* Godlatro Graphql merger v.1.1.3 */
 const { readFileSync, readdirSync } = require('fs');
 const merger = (options) => {
 
