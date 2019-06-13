@@ -8,51 +8,51 @@ You can use this module to merge all your `*.graphql` files for `Apollo Graphql 
 
 ## Example Schemas:
 
-/*user.graphql*/
-### type User {
-###   name: String #comment
-###   password: String
-### }
-### 
-### type Query {
-###   users: [User]
-### }
-### type Mutation {
-###   user(name: String): User
-### }
+## *user.graphql*
+#### type User {
+####   name: String #comment
+####   password: String
+#### }
+#### 
+#### type Query {
+####   users: [User]
+#### }
+#### type Mutation {
+####   user(name: String): User
+#### }
 
-/*books.graphql*/
-### type Book {
-###   name: String #comment
-###   author: [User]
-### }
-### #comment
-### type Query {
-###   books: [Book]
-### }
-### type Mutation {
-###   book(name: String): Book
-### }
+## *books.graphql*
+#### type Book {
+####   name: String #comment
+####   author: [User]
+#### }
+#### #comment
+#### type Query {
+####   books: [Book]
+#### }
+#### type Mutation {
+####   book(name: String): Book
+#### }
 
-/*Exported schema after merge*/
-### type User {
-###   name: String
-###   password: String
-### }
-### 
-### type Book {
-###   name: String
-###   author: [User]
-### }
-### 
-### type Query {
-###   users: [User]
-###   books: [Book]
-### }
-### type Mutation {
-###   user(name: String): User
-###   book(name: String): Book
-### }
+## *Exported schema after merge*
+#### type User {
+####   name: String
+####   password: String
+#### }
+#### 
+#### type Book {
+####   name: String
+####   author: [User]
+#### }
+#### 
+#### type Query {
+####   users: [User]
+####   books: [Book]
+#### }
+#### type Mutation {
+####   user(name: String): User
+####   book(name: String): Book
+#### }
 
 
 ## How to Use
