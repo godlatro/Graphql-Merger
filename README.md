@@ -69,7 +69,7 @@ then import it in js.
 ```javascript
 const { gql } = require('apollo-server');
 const {merger} = require('./GMerger');
-const typeDefs = merger();`
+const typeDefs = merger();
 module.exports.typeDefs = gql(typeDefs);
 ```
 
