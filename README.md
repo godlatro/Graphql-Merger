@@ -9,7 +9,7 @@ You can use this module to merge all your `*.graphql` files for `Apollo Graphql 
 ## Example Schemas:
 
 ## *user.graphql*
-#### type User {
+#### `type User {
 ####   name: String #comment
 ####   password: String
 #### }
@@ -19,10 +19,10 @@ You can use this module to merge all your `*.graphql` files for `Apollo Graphql 
 #### }
 #### type Mutation {
 ####   user(name: String): User
-#### }
+#### }`
 
 ## *books.graphql*
-#### type Book {
+#### `type Book {
 ####   name: String #comment
 ####   author: [User]
 #### }
@@ -32,10 +32,10 @@ You can use this module to merge all your `*.graphql` files for `Apollo Graphql 
 #### }
 #### type Mutation {
 ####   book(name: String): Book
-#### }
+#### }`
 
 ## *Exported schema after merge*
-#### type User {
+#### `type User {
 ####   name: String
 ####   password: String
 #### }
@@ -52,7 +52,7 @@ You can use this module to merge all your `*.graphql` files for `Apollo Graphql 
 #### type Mutation {
 ####   user(name: String): User
 ####   book(name: String): Book
-#### }
+#### }`
 
 
 ## How to Use
@@ -60,10 +60,10 @@ You can use this module to merge all your `*.graphql` files for `Apollo Graphql 
 You can donwload and unzip `index.js` to your graphql dir, rename it as you wish, like `GMerger.js`
 then import it in js.
 
-### `const { gql } = require('apollo-server');`
-### `const {merger} = require('./GMerger');`
-### `const typeDefs = merger();`
-### `module.exports.typeDefs = gql(typeDefs);`
+#### `const { gql } = require('apollo-server');
+### const {merger} = require('./GMerger');
+### const typeDefs = merger();
+### module.exports.typeDefs = gql(typeDefs);`
 
 ## options
 
