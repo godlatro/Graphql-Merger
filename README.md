@@ -4,7 +4,7 @@ My merger dont need any dependency (only [fs]), small and simple;
 
 # WTF?
 
-You can use this module to merge all your `*.graphql` files for `Apollo Graphql Client`
+You can use this module to merge all your `*.graphql` files for `Apollo Graphql Client or Server`
 
 ### install
 with `npm i graphql-merger`
@@ -88,4 +88,4 @@ module.exports.typeDefs = gql(typeDefs);
 ## На русском
 
 это маленький модуль который не имеет внешних зависимостей, и который можно подключить как JS файл или как NPM зависимость
-С помощью этого модуля можно объединить все `*.graphql` файлы для импорта в клиент `Apollo Graphql Client`
+С помощью этого модуля можно объединить все `*.graphql` файлы для импорта в клиент `Apollo Graphql Client or Server`
