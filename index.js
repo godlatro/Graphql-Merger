@@ -37,12 +37,14 @@ const merger = (options) => {
 
       Query && Query.length && Query.forEach(e => {
         let S = e.replace(/type[\s]+Query[\s]+{/g,'')
+        .replace(/type[\s]+Query.*{/g,'')
         .replace(/}/g,'');
         Querys.push(S);
       });
 
       Mutation && Mutation.length && Mutation.forEach(e => {
         let S = e.replace(/type[\s]+Mutation[\s]+{/g,'')
+        .replace(/type[\s]+Mutation.*{/g,'')
         .replace(/}/g,'');
         Muts.push(S);
       });
