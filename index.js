@@ -1,4 +1,4 @@
-/* Godlatro Graphql merger v.1.1.4 */
+/* Godlatro Graphql merger v.2.1.0 */
 const { readFileSync, readdirSync } = require('fs');
 const merger = (options) => {
 
@@ -23,11 +23,9 @@ const merger = (options) => {
     // Files.push(Cont);
 
     if(Debug){
-      console.log('+++++++++++++++++++++++++++');
-      console.log('file', file);
-      console.log('^^^^');
+      console.log('++++++++++++file+++++++++++++++',file);
       console.log(Cont)
-      console.log('+++++++++++++++++++++++++++');
+      console.log('++++++++++++file+++++++++++++++');
     }
 
     return Cont;
@@ -91,11 +89,9 @@ const merger = (options) => {
   const typeDefs = `${files}\n${Ques && Ques.length && Q || ''}\n${Muts && Muts.length && M || ''}`;
   
   if(Debug){
-    console.log('+++++++++++++++++++++++++++');
-    console.log('result')
+    console.log('++++++++++result+++++++++++++++++');
     console.log(typeDefs)
-    console.log('result')
-    console.log('+++++++++++++++++++++++++++');
+    console.log('++++++++++result+++++++++++++++++');
   }
 
   return typeDefs;
