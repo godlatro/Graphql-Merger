@@ -6,8 +6,8 @@ My merger dont need any dependency (only [fs]), small and simple;
 
 You can use this module to merge all your `*.graphql` files for `Apollo Graphql Client or Server`
 
-### install
-with `npm i graphql-merger`
+# install
+`npm i graphql-merger`
 or just insert `index.js`, and rename it as you wish
 
 ## Example Schemas:
@@ -69,19 +69,25 @@ or just insert `index.js`, and rename it as you wish
 
 You can donwload and unzip `index.js` to your graphql dir, rename it as you wish, like `GMerger.js`
 then import it in js.
+or do `npm i graphql-merger`
 
 ```javascript
 const { gql } = require('apollo-server');
+const {merger} = require('graphql-merger');
+// or
+const { gql } = require('apollo-server');
 const {merger} = require('./GMerger');
-const typeDefs = merger({dir: __dirname || './MyGraphqlFiles'});
+
+const typeDefs = merger({dir: __dirname || './MyGraphqlFiles', debug: false });
 module.exports.typeDefs = gql(typeDefs);
 ```
 
 ## options
 
-`const typeDefs = merger({ debug: true, type: 'graphql', dir: '/usr/node/graphql' });`
+`const typeDefs = merger({ debug: true, replace: true, type: 'graphql', dir: '/usr/node/graphql' });`
 
-*debug* - show result in console.log --- `true`
+*debug* - show result in console.log --- `true` or `false`
+*replace* - replace bad schemas how can, default `true` --- `true` or `false`
 *type* - choose file types, default is `*.graphql`, but if you want reanme your files in other type, like `*.g` or `*.gql`, you can set this
 *dir* - choose scan dir with `*.graphql` files
 
