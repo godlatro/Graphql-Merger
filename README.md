@@ -79,9 +79,10 @@ module.exports.typeDefs = gql(typeDefs);
 
 ## options
 
-`const typeDefs = merger({ debug: true, type: 'graphql', dir: '/usr/node/graphql' });`
+`const typeDefs = merger({ debug: true, replace: true, type: 'graphql', dir: '/usr/node/graphql' });`
 
-*debug* - show result in console.log --- `true`
+*debug* - show result in console.log --- `true` or `false`
+*replace* - default `true`, replace bad code, do my best --- `true` or `false`
 *type* - choose file types, default is `*.graphql`, but if you want reanme your files in other type, like `*.g` or `*.gql`, you can set this
 *dir* - choose scan dir with `*.graphql` files
 
