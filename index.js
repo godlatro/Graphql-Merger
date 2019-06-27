@@ -1,4 +1,4 @@
-/* Godlatro Graphql merger v.2.1.3 */
+/* Godlatro Graphql merger v.2.2.0 */
 const { readFileSync, readdirSync } = require('fs');
 const merger = (options) => {
 
@@ -32,15 +32,25 @@ const merger = (options) => {
   })
   .join('\n');
 
+  if(Debug){
+    console.log('++++++++++Old+++++++++++++++++');
+    console.log(files)
+    console.log('++++++++++Old+++++++++++++++++');
+  }
+
   if(!files) return null;
 
   if(Replace){
     files = files
     .replace(/#.*/g,'')
     .replace(/:/gi,': ')
+    .replace(/\(\):/gi,': ')
+    .replace(/\(\)/gi,'')
     .replace(/}/gi,'}\n')
     .replace(/{/gi,' {\n')
-    
+    .replace(/\|\n/g,'| ')
+    .replace(/\|/g,' | ')
+
     .replace(/\t/gi,' ')
     .replace(/    /gi,' ')
     .replace(/  /gi,' ')
@@ -49,41 +59,44 @@ const merger = (options) => {
     .replace(/(?:\r\n|\r|\n)/gi,'\n')
     .replace(/[\n]+/gi,'\n')
     
-    .replace(/\|\n/g,'| ')
-    .replace(/\|/g,' | ')
-    
-  
     .replace(/[,.]/gi,'')
-    // .replace(/[^\w\d:{}\s=|\[\]!]/g,'');
+    // .replace(/[^\w\d:{}\s=|\[\]!'"]/g,'');
   }
   
-  let alltype = files.match(/type.*{[\s\S]*?}/g) || [];
-  let allinput = files.match(/input.*{[\s\S]*?}/g) || [];
-  let allinterface = files.match(/interface.*{[\s\S]*?}/g) || [];
-  let allunion = files.match(/union.*=.*/g) || [];
-  let allenum = files.match(/enum.*{[\s\S]*?}/g) || [];
-  All.push(...alltype, ...allinput, ...allinterface, ...allunion, ...allenum);
-  let AllFiles = All.join('\n');
+  // let alltype = files.match(/type.*{[\s\S]*?}/g) || [];
+  // let allinput = files.match(/input.*{[\s\S]*?}/g) || [];
+  // let allinterface = files.match(/interface.*{[\s\S]*?}/g) || [];
+  // let allunion = files.match(/union.*=.*/g) || [];
+  // let allenum = files.match(/enum.*{[\s\S]*?}/g) || [];
+  // All.push(...alltype, ...allinput, ...allinterface, ...allunion, ...allenum);
+  // let AllFiles = All.join('\n');
   
-  AllFiles = AllFiles
 
-  let q = AllFiles.match(/(type[\s]*Query[\s]*{)[\s\S]*?}/g);
-  let m = AllFiles.match(/(type[\s]*Mutation[\s]*{)[\s\S]*?}/g);
+  let q = files.match(/type\s*Query\s*{[\s\S]*?}/g);
+  let m = files.match(/type\s*Mutation\s*{[\s\S]*?}/g);
+
+  files = files.replace(/type\s*Query\s*{[\s\S]*?}/g, '');
+  files = files.replace(/type\s*Mutation\s*{[\s\S]*?}/g, '');
+  files = files.replace(/[\n]+/gi,'\n');
 
   q && q.length && q.forEach(e => {
-        let S = e.replace(/type[\s]*Query[\s]*{/g,'')
+
+        let S = e.replace(/type\s*Query\s*{/g,'\n')
         .replace(/}/g,'\n');
+        if(!S) return null;
         Ques.push(S);
       });
   m && m.length && m.forEach(e => {
-        let S = e.replace(/type[\s]*Mutation[\s]*{/g,'')
+        let S = e.replace(/type\s*Mutation\s*{/g,'\n')
         .replace(/}/g,'\n');
+        if(!S) return null;
         Muts.push(S);
       });
 
 
-  const Q = `\n type Query{${Ques.join('')}} \n`;
-  const M = `\n type Mutation{${Muts.join('')}} \n`;
+
+  const Q = `\ntype Query {\n${Ques.join('\n').replace(/[\n]+/gi,'\n')}} \n`;
+  const M = `\ntype Mutation {\n${Muts.join('\n').replace(/[\n]+/gi,'\n')}} \n`;
   const typeDefs = `${files}\n${Ques && Ques.length && Q || ''}\n${Muts && Muts.length && M || ''}`;
   
   if(Debug){
