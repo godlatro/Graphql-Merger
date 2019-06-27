@@ -67,8 +67,8 @@ const merger = (options) => {
   
   AllFiles = AllFiles
 
-  let q = AllFiles.match(/(type.*Query.*{)[\s\S]*?}/g);
-  let m = AllFiles.match(/(type.*Mutation.*{)[\s\S]*?}/g);
+  let q = AllFiles.match(/(type[\s]*Query[\s]*{)[\s\S]*?}/g);
+  let m = AllFiles.match(/(type[\s]*Mutation[\s]*{)[\s\S]*?}/g);
 
   q && q.length && q.forEach(e => {
         let S = e.replace(/type[\s]*Query[\s]*{/g,'')
