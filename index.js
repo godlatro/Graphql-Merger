@@ -1,4 +1,4 @@
-/* Godlatro Graphql merger v.2.2.1 */
+/* Godlatro Graphql merger v.2.2.2 */
 const { readFileSync, readdirSync } = require('fs');
 const merger = (options) => {
 
@@ -104,6 +104,13 @@ const merger = (options) => {
   const Q = `\ntype Query {\n${Ques.join('\n').replace(/[\n]+/gi,'\n')}} \n`;
   const M = `\ntype Mutation {\n${Muts.join('\n').replace(/[\n]+/gi,'\n')}} \n`;
   const S = `\ntype Subscription {\n${Subs.join('\n').replace(/[\n]+/gi,'\n')}} \n`;
+  if(Debug){
+    console.log('++++++Debug++++++');
+    console.log(Q)
+    console.log(M)
+    console.log(S)
+    console.log('++++++Debug++++++');
+  }
   const typeDefs = `${files}\n${Ques && Ques.length && Q || ''}\n${Muts && Muts.length && M || ''}\n${Subs && Subs.length && S || ''}`;
   
   if(Debug){
