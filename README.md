@@ -1,4 +1,4 @@
-# Graphql-files-merge-JS
+# Graphql-merger
 Merge All *.graphql files in dir in JS
 My merger dont need any dependency (only [fs]), small and simple;
 
