@@ -1,6 +1,6 @@
 {
   "name": "graphql-merger",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "merge your grapql files in dir",
   "main": "index.js",
   "scripts": {

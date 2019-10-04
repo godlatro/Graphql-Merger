@@ -37,6 +37,10 @@ or just insert `index.js`, and rename it as you wish
  type Query {
    books: [Book]
  }
+  type Subscription {
+   users: [User]
+   books: [Book]
+ }
  type Mutation {
    book(name: String): Book
  }
@@ -55,6 +59,10 @@ or just insert `index.js`, and rename it as you wish
  }
  
  type Query {
+   users: [User]
+   books: [Book]
+ }
+ type Subscription {
    users: [User]
    books: [Book]
  }
