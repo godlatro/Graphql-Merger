@@ -13,6 +13,7 @@ const merger = (options) => {
 
   const Ques = [];
   const Muts = [];
+  const Subs = [];
   const All = [];
 
   let files = readdirSync(Dir)
@@ -74,13 +75,14 @@ const merger = (options) => {
 
   let q = files.match(/type\s*Query\s*{[\s\S]*?}/g);
   let m = files.match(/type\s*Mutation\s*{[\s\S]*?}/g);
+  let s = files.match(/type\s*Subscription\s*{[\s\S]*?}/g);
 
   files = files.replace(/type\s*Query\s*{[\s\S]*?}/g, '');
   files = files.replace(/type\s*Mutation\s*{[\s\S]*?}/g, '');
+  files = files.replace(/type\s*Subscription\s*{[\s\S]*?}/g, '');
   files = files.replace(/[\n]+/gi,'\n');
 
   q && q.length && q.forEach(e => {
-
         let S = e.replace(/type\s*Query\s*{/g,'\n')
         .replace(/}/g,'\n');
         if(!S) return null;
@@ -92,12 +94,17 @@ const merger = (options) => {
         if(!S) return null;
         Muts.push(S);
       });
-
-
+  s && s.length && s.forEach(e => {
+        let S = e.replace(/type\s*Mutation\s*{/g,'\n')
+        .replace(/}/g,'\n');
+        if(!S) return null;
+        Subs.push(S);
+      });
 
   const Q = `\ntype Query {\n${Ques.join('\n').replace(/[\n]+/gi,'\n')}} \n`;
   const M = `\ntype Mutation {\n${Muts.join('\n').replace(/[\n]+/gi,'\n')}} \n`;
-  const typeDefs = `${files}\n${Ques && Ques.length && Q || ''}\n${Muts && Muts.length && M || ''}`;
+  const S = `\ntype Subscription {\n${Subs.join('\n').replace(/[\n]+/gi,'\n')}} \n`;
+  const typeDefs = `${files}\n${Ques && Ques.length && Q || ''}\n${Muts && Muts.length && M || ''}\n${Subs && Subs.length && S || ''}`;
   
   if(Debug){
     console.log('++++++++++result+++++++++++++++++');
