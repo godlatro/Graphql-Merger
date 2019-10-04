@@ -95,7 +95,7 @@ const merger = (options) => {
         Muts.push(S);
       });
   s && s.length && s.forEach(e => {
-        let S = e.replace(/type\s*Mutation\s*{/g,'\n')
+        let S = e.replace(/type\s*Subscription\s*{/g,'\n')
         .replace(/}/g,'\n');
         if(!S) return null;
         Subs.push(S);
