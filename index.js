@@ -1,14 +1,18 @@
-/* Godlatro Graphql merger v.2.2.2 */
+/* Godlatro Graphql merger v.3.0.0 */
 const { readFileSync, readdirSync } = require('fs');
-const merger = (options) => {
+const merger = ({
+  debug = { showOld: false, showDir: false, showFiles: false, showResult: false, showQMS: false,},
+  replace = true,
+  dir = '',
+  type = 'graphql'
+}) => {
 
-  const Debug = options && options.debug && options.debug || false;
-  const Replace = options && options.replace && options.replace || true;
-  const Dir = options && options.dir && options.dir || this.__dirname;
-  const FType = options && options.type && options.type || 'graphql';
-  if(Debug){
-    console.log('+++++++++++++++++++++++++++');
-    console.log('Merger directory ', Dir);
+  const Debug = debug;
+  const Replace = replace;
+  const Dir = dir || this.__dirname;
+  const FType = type;
+  if(Debug === true || debug && debug.showDir){
+    console.log('++++++Debug Dir ====>', Dir);
   }
 
   const Ques = [];
@@ -23,23 +27,25 @@ const merger = (options) => {
     let Cont = readFileSync(`${Dir}/${file}`, { encoding: 'utf8' });
     // Files.push(Cont);
 
-    if(Debug){
-      console.log('++++++++++++file+++++++++++++++',file);
-      console.log(Cont)
-      console.log('++++++++++++file+++++++++++++++');
+    if(Debug === true || debug && debug.showFiles){
+       console.log('++++++++Debug showFile ====>',file);
+       console.log(Cont)
+       console.log('<=== Debug showFiles +++');
     }
 
     return Cont;
   })
   .join('\n');
 
-  if(Debug){
-    console.log('++++++++++Old+++++++++++++++++');
+  if(Debug === true || debug && debug.showOld){
+    console.log('++++++++++Debug showOld ====>');
     console.log(files)
-    console.log('++++++++++Old+++++++++++++++++');
+    console.log('<=== Debug showOld +++');
   }
 
-  if(!files) return null;
+  if(!files) {
+    throw new Error('Have no files');
+  };
 
   if(Replace){
     files = files
@@ -104,22 +110,22 @@ const merger = (options) => {
   const Q = `\ntype Query {\n${Ques.join('\n').replace(/[\n]+/gi,'\n')}} \n`;
   const M = `\ntype Mutation {\n${Muts.join('\n').replace(/[\n]+/gi,'\n')}} \n`;
   const S = `\ntype Subscription {\n${Subs.join('\n').replace(/[\n]+/gi,'\n')}} \n`;
-  if(Debug){
-    console.log('++++++Debug++++++');
+  if(Debug === true || debug && debug.showQMS){
+    console.log('++++++ Debug showQMS ====>');
     console.log(Q)
     console.log(M)
     console.log(S)
-    console.log('++++++Debug++++++');
+    console.log('<=== Debug showQMS +++');
   }
   const typeDefs = `${files}\n${Ques && Ques.length && Q || ''}\n${Muts && Muts.length && M || ''}\n${Subs && Subs.length && S || ''}`;
   
-  if(Debug){
-    console.log('++++++++++result+++++++++++++++++');
+  if(Debug === true || debug && debug.showResult){
+    console.log('+++++++ showResult ====>');
     console.log(typeDefs)
-    console.log('++++++++++result+++++++++++++++++');
+    console.log('<=== showResult end +++');
   }
 
   return typeDefs;
 }
 
-module.exports.merger = merger;
+module.exports = merger;
