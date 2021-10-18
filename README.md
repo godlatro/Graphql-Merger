@@ -55,9 +55,9 @@ or just insert `index.js`, and rename it as you wish
 ## *index.js*
  ```javascript
 const { gql } = require('apollo-server-express');
-const { merger } = require('graphql-merger');
-const typeDefs = merger({ dir: __dirname, debug: false });
-module.exports.typeDefs = gql(typeDefs);
+const merger = require('graphql-merger');
+const typeDefs = merger({ dir: __dirname, debug: { showResult: false }});
+module.exports = gql(typeDefs);
  ```
  
 
