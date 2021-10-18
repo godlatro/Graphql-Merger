@@ -3,7 +3,7 @@
 @example
 ```
 import merger = require('graphql-merger');
-const typeDefs = merger({ dir: __dirname, debug: false });
+const typeDefs = merger({ dir: __dirname, debug: { showResult: true } });
 
 ```
 */
